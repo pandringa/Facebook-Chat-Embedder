@@ -11,9 +11,7 @@ var requestEmbed = function(url, width){
 }
 
 var loadEmbeds = function(){
-	var links = $("._38 a");
-	links.css("color", "red");
-	links.each(function(i){
+	$("._38 a").each(function(i){
 		var link = $(this);
 		if(link.attr('hasBeenEmbedded')!='yes'){
 			link.after('<div class="extension-embed-loading"><i class="fa fa-spinner fa-spin fa-3x"></i></div>');
@@ -41,7 +39,6 @@ var parseData = function(data){
 var checker = null;
 
 var checkLoad = function(){
-	console.log("checking!");
 	if($("._38").exists()){
 		loadEmbeds();
 	}
@@ -50,7 +47,6 @@ var checkLoad = function(){
 
 //Checks for changes to the messenger, so that we can look for more links to change
 $("#webMessengerRecentMessages").bind("DOMSubtreeModified", function() {
-    console.log("tree changed");
     if(checker == null)
-    	checker = setTimeout(checkLoad, 1000);
+    	checker = setTimeout(checkLoad, 1000); //so that we don't check multiple times per second
 });
