@@ -1,5 +1,11 @@
-.embedLoading{
+.extension-embed-loading{
 	text-align: center;
 	color: gray;
 	margin-bottom: 10px;
 }
+.extension-embedded-content{
+	margin-top: 2px;
+	margin-bottom: 10px;
+	width: 100%;
+}
+
