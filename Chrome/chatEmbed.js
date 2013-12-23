@@ -30,6 +30,8 @@ var loadEmbeds = function(){
 var parseData = function(data){
 	if(data.html)
 		return data.html;
+	else if(data.type = 'photo' && data.url) //for stuff like imgur
+		return '<img src="'+data.url+'"/>';
 	else if(data.thumbnail_url) //for stuff like Instagram and Xkcd that don't have embedded iframes
 		return '<img src="'+data.thumbnail_url+'"/>';
 	else
