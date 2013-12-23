@@ -15,14 +15,17 @@ var loadEmbeds = function(){
 	links.css("color", "red");
 	links.each(function(i){
 		var link = $(this);
-		link.after('<div class="extension-embed-loading"><i class="fa fa-spinner fa-spin fa-3x"></i></div>');
-		requestEmbed(link.attr('href'), $('._53').width())
-			.done(function(data){
-				link.next().after('<div class="extension-embedded-content">'+parseData(data)+'</div');
-				setTimeout(function(){
-					link.next().remove();
-				}, 1000);
-			});
+		if(link.attr('hasBeenEmbedded')!='yes'){
+			link.after('<div class="extension-embed-loading"><i class="fa fa-spinner fa-spin fa-3x"></i></div>');
+			requestEmbed(link.attr('href'), $('._53').width())
+				.done(function(data){
+					link.next().after('<div class="extension-embedded-content">'+parseData(data)+'</div');
+					link.attr('hasBeenEmbedded', 'yes');
+					setTimeout(function(){
+						link.next().remove();
+					}, 1000);
+				});
+		}
 	});
 }
 
@@ -35,10 +38,19 @@ var parseData = function(data){
 		return "";
 }
 
+var checker = null;
+
 var checkLoad = function(){
+	console.log("checking!");
 	if($("._38").exists()){
 		loadEmbeds();
-		clearInterval(checker);
 	}
+	checker = null;
 }
-var checker = setInterval(checkLoad, 500)
+
+//Checks for changes to the messenger, so that we can look for more links to change
+$("#webMessengerRecentMessages").bind("DOMSubtreeModified", function() {
+    console.log("tree changed");
+    if(checker == null)
+    	checker = setTimeout(checkLoad, 1000);
+});
