@@ -15,9 +15,13 @@ var loadEmbeds = function(){
 	links.css("color", "red");
 	links.each(function(i){
 		var link = $(this);
+		link.after('<div class="embedLoading"><i class="fa fa-spinner fa-spin fa-3x"></i></div>');
 		requestEmbed(link.attr('href'), $('._53').width())
 			.done(function(data){
-				link.after(data.html);
+				link.next().after(data.html);
+				setTimeout(function(){
+					link.next().remove();
+				}, 1000);
 			});
 	});
 }

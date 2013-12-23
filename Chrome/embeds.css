@@ -1,1 +1,5 @@
-div.home_right_column.tickerOnTop, #rightCol {}
+.embedLoading{
+	text-align: center;
+	color: gray;
+	margin-bottom: 10px;
+}
