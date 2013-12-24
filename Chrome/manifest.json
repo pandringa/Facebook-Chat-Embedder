@@ -4,7 +4,7 @@
   "description": "Embeds stuff into your facebook chats",
   "manifest_version": 2,
   "permissions": [
-    "https://www.facebook.com/messages/*","webRequest","webRequestBlocking", "*://*.embed.ly/*"
+    "*://*.facebook.com/*","webRequest","webRequestBlocking", "*://*.embed.ly/*"
   ],
   "web_accessible_resources": ["fonts/*"],
   "content_security_policy": "script-src 'self' https://api.embed.ly/1/oembed; object-src 'self'; connect-src https://api.embed.ly/1/oembed",
@@ -14,7 +14,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.facebook.com/messages/*"],
+      "matches": ["*://*.facebook.com/*"],
       "css": ["font-awesome.css", "embeds.css"],
       "js": ["jquery.js", "chatEmbed.js"]
     }

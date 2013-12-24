@@ -13,5 +13,5 @@ chrome.webRequest.onHeadersReceived.addListener(function(details){
   blockingResponse.responseHeaders = headers;
   return blockingResponse;
 },
-{urls: ["https://www.facebook.com/messages/*"]},
+{urls: ["*://*.facebook.com/*"]},
 ["blocking", "responseHeaders"]);
