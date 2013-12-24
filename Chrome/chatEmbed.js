@@ -30,11 +30,12 @@ var loadEmbeds = function(){
 var parseData = function(data){
 	if(data.html)
 		return data.html;
-	else if(data.type = 'photo' && data.url && data.provider_name != "Xkcd")
+	else if(data.type = 'photo' && data.url && data.provider_name != "Xkcd") 	//For stuff that doesn't have iframes
 		return '<img src="'+data.url+'"/>';
-	else if(data.thumbnail_url) //for stuff like Instagram and Xkcd that don't have embedded iframes
+	else if(data.thumbnail_url) 	// except for some, which don't have photo urls either, only thumbnails
 		return '<img src="'+data.thumbnail_url+'"/>';
-	else
+	else if(data.type == 'link') // if their API doesn't have a result for this website
+	else 	// man, this API is weird
 		return "";
 }
 
